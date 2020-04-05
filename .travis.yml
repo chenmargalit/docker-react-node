@@ -10,16 +10,16 @@ script:
   - docker run -e CI=true chenmargalit/react-test npm test
 
 after_success:
-  - docker build -t chenmargalit/multi_client ./client
-  - docker build -t chenmargalit/multi_nginx ./nginx
-  - docker build -t chenmargalit/multi_server ./server
-  - docker build -t chenmargalit/multi_worker ./worker
+  - docker build -t chenmargalit/multi-client ./client
+  - docker build -t chenmargalit/multi-nginx ./nginx
+  - docker build -t chenmargalit/multi-server ./server
+  - docker build -t chenmargalit/multi-worker ./worker
 
 # login to docker cli
 echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
 
 # push images to docker hub
-- docker push chenmargalit/multi_client
-- docker push chenmargalit/multi_nginx
-- docker push chenmargalit/multi_server
-- docker push chenmargalit/multi_worker
+- docker push chenmargalit/multi-client
+- docker push chenmargalit/multi-nginx
+- docker push chenmargalit/multi-server
+- docker push chenmargalit/multi-worker
