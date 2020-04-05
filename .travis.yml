@@ -1,0 +1,26 @@
+sudo: required
+services:
+  - docker
+
+before_install:
+  # the last ./client is instead of the "." we usually do on build
+  - docker build -t chenmargalit/react-test -f ./client/Dockerfile.dev ./client
+
+script:
+  # -- -- converage makes the test suit exit when it ends so it doesn't keep on hanging.
+  - docker run chenmargalit/react-test npm test -- --coverage
+
+after_success:
+  - docker build -t chenmargalit/multi_client ./client
+  - docker build -t chenmargalit/multi_nginx ./nginx
+  - docker build -t chenmargalit/multi_server ./server
+  - docker build -t chenmargalit/multi_worker ./worker
+
+# login to docker cli
+echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+
+# push images to docker hub
+- docker push chenmargalit/multi_client
+- docker push chenmargalit/multi_nginx
+- docker push chenmargalit/multi_server
+- docker push chenmargalit/multi_worker
