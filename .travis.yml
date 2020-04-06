@@ -15,11 +15,11 @@ after_success:
   - docker build -t chenmargalit/multi-server ./server
   - docker build -t chenmargalit/multi-worker ./worker
 
-# login to docker cli
-echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  # login to docker cli
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
 
-# push images to docker hub
-- docker push chenmargalit/multi-client
-- docker push chenmargalit/multi-nginx
-- docker push chenmargalit/multi-server
-- docker push chenmargalit/multi-worker
+  # push images to docker hub
+  - docker push chenmargalit/multi-client
+  - docker push chenmargalit/multi-nginx
+  - docker push chenmargalit/multi-server
+  - docker push chenmargalit/multi-worker
