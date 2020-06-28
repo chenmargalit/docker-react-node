@@ -20,7 +20,7 @@ services:
       dockerfile: Dockerfile.dev
       context: ./server
     volumes:
-      # generate a volumne (a reference) to everything besides the node_modules, where it is self referenced. For the rest of stuff, find it in the app folder which is the container.
+      # generate a volume (a reference) to everything besides the node_modules, where it is self referenced. For the rest of stuff, find it in the app folder which is the container.
       - /app/node_modules
       - ./server:/app
     environment:

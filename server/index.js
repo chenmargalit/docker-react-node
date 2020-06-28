@@ -29,6 +29,7 @@ const redis = require('redis');
 const redisClient = redis.createClient({
   host: keys.redisHost,
   port: keys.redisPort,
+  // if server disconnects, try again every 1 second
   retry_strategy: () => 1000
 });
 const redisPublisher = redisClient.duplicate();
